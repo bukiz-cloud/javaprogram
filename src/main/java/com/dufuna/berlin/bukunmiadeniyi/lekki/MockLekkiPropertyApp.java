@@ -6,12 +6,16 @@ import com.dufuna.berlin.bukunmiadeniyi.lekki.service.MockLekkiPropertyService;
 
 public class MockLekkiPropertyApp {
             public static void main(String[] args) {
-                LekkiProperty property1 = new LekkiProperty(1, "Abuja", "Flat");
-                System.out.println("Property created successfully");
+                String[] propertyAddress = { "Lagos","Abuja","Oyo"};
+                String[] propertyType = { "Duplex","Flat","Bungalow"};
+                LekkiPropertyService service = new MockLekkiPropertyService();
 
-                MockLekkiPropertyService myProperty = new MockLekkiPropertyService();
-                myProperty.saveProperty(property1);
-                myProperty.getProperty();
+                for (int i = 0; i < propertyAddress.length; i++) {
+                    LekkiProperty property = new LekkiProperty( i, propertyAddress[i], propertyType[i]);
+                    service.saveProperty(property);
+                    System.out.println(service.getProperty(i));
+                }
+                System.out.println(service.getProperties());
             }
 
 }

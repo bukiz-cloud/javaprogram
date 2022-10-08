@@ -1,22 +1,27 @@
 package com.dufuna.berlin.bukunmiadeniyi.lekki.service;
 
 import com.dufuna.berlin.bukunmiadeniyi.lekki.model.LekkiProperty;
+import com.dufuna.berlin.bukunmiadeniyi.lekki.repository.SimpleLekkiPropertyRepository;
+import com.dufuna.berlin.bukunmiadeniyi.lekki.repository.SimpleLekkiPropertyRepositoryImpl;
 
+import java.util.List;
 
 
 public class MockLekkiPropertyService implements LekkiPropertyService {
-    @Override
-    public void saveProperty(LekkiProperty Lekkiproperty) {
-        System.out.println(this.getClass().getSimpleName() + "." + new Exception().getStackTrace()[0].getMethodName() + " is called");
+    SimpleLekkiPropertyRepository propertyRepository = new SimpleLekkiPropertyRepositoryImpl();
+    public void saveProperty(LekkiProperty LekkiProperty) {
+        propertyRepository.save(LekkiProperty);
+    }
+
+    public LekkiProperty getProperty(int propertyId) {
+        return propertyRepository.findById(propertyId);
     }
 
     @Override
-    public LekkiProperty getProperty() {
-        System.out.println(this.getClass().getSimpleName() + "." + new Exception().getStackTrace()[0].getMethodName() + " is called");
-        LekkiProperty LekkiProperty = new LekkiProperty(1, "Abuja", "Flat" );
-        return LekkiProperty;
+    public List<LekkiProperty> getProperties() {
+        return propertyRepository.findAll();
+    }
     }
 
 
 
-}
